@@ -2,6 +2,8 @@
   "name": "manage",
   "version": "1.0.0",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "management": "cd management && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
@@ -9,6 +11,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "gh-pages": "^3.1.0",
     "nodemon": "^2.0.6"
   },
   "devDependencies": {
