@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Customer from './component/Customer'
+import CustomerAdd from './component/CustomerAdd'
 import './App.css';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -41,6 +42,7 @@ return body;
 render() {
 const { classes } = this.props;
 return (
+  <div>
 <Paper className={classes.root}>
 <Table className={classes.table}>
 <TableHead>
@@ -60,6 +62,8 @@ return <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.
 </TableBody>
 </Table>
 </Paper>
+<CustomerAdd/>
+</div>
 );
 }
 }
