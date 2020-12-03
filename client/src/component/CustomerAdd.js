@@ -26,7 +26,9 @@ handleFormSubmit(e) {
     this.addCustomer()
     .then((response) => {
     console.log(response.data);
+    this.props.stateRefresh();
     })
+
 this.setState({
     file:null,
     userName:'',
@@ -35,7 +37,7 @@ this.setState({
     job:'',
     fileName:''
 })
-    window.location.reload();
+   
     }
     
     handleFileChange(e) {
@@ -45,14 +47,11 @@ this.setState({
     });
     }
     
-    
     handleValueChange(e) {
     let nextState = {};
     nextState[e.target.name] = e.target.value;
     this.setState(nextState);
     }
-    
-
 
 addCustomer = () => {
     const url = 'api/customers';

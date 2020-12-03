@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Customer from './component/Customer'
-import CustomerAdd from './component/CustomerAdd'
+import CustomerAdd from './component/CustomerAdd';
 import './App.css';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -22,10 +22,22 @@ minWidth: 1080
 });
 
 class App extends Component {
-
-state = {
-customers: ''
+//전체목록 갱신하고 스테이트 초기화 하기
+constructor(props) {
+  super(props);
+  this.state = {
+    customers :'',
+    completed : 0 
+  }
 }
+stateRefresh = () => {
+  this.timer =setInterval(this.progress,20);
+  //고객데이터 불러오는 api 
+  this.callApi()
+      .then(res => this.setState({customers:res}))
+      .catch(err => console.log(err));
+}
+
 
 componentDidMount() {
 this.callApi()
@@ -62,7 +74,7 @@ return <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.
 </TableBody>
 </Table>
 </Paper>
-<CustomerAdd/>
+<CustomerAdd stateRefresh={this.stateRefresh}/>
 </div>
 );
 }
