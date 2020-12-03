@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Customer from './components/Customer'
+import Customer from './component/Customer'
 import './App.css';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -7,34 +7,35 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-const customers = [
-{
-'id': 1,
-'image': 'https://placeimg.com/64/64/1',
-'name': '홍윤은',
-'birthday': '950624',
-'gender': '여자',
-'job': '대학생'
-},
-{
-'id': 2,
-'image': 'https://placeimg.com/64/64/2',
-'name': '홍길동',
-'birthday': '950624',
-'gender': '여자',
-'job': '프로그래머'
-},
-{
-'id': 3,
-'image': 'https://placeimg.com/64/64/3',
-'name': '홍윤은',
-'birthday': '950624',
-'gender': '남자',
-'job': '디자이너'
-}
-]
+const styles = theme => ({
+  root: {
+  width: "100%",
+  marginTop: theme.spacing.unit * 3,
+  overflowX: "auto"
+  },
+  table: {
+  minWidth: 1080
+  }
+  });
+  
 
 class App extends Component {
+
+state = {
+  customers:""
+}
+//api서버에 접근하여 데이터를 받아옴 
+componentDidMount(){
+  this.callApi()
+  //받아서 state 설정 
+  .then(res => this.setState({customers:res}))
+  .catch(err => console.log(err));
+}
+callApi = async () => {
+  const response = await fetch('/api/customers');
+  const body = await response.json();
+  return body;
+}
 render() {
 return (
 <div>
@@ -50,9 +51,9 @@ return (
 </TableRow>
 </TableHead>
 <TableBody>
-{customers.map(c => {
+{this.state.customers ? this.state.customers.map(c => {
 return <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />
-})}
+}) : ''}
 </TableBody>
 </Table>
 </div>
@@ -60,4 +61,5 @@ return <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.
 }
 }
 
-export default App;
+export default withStyles(styles)(App);
+
