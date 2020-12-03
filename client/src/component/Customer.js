@@ -10,9 +10,9 @@ return (
 <TableCell>{this.props.id}</TableCell>
 <TableCell><img src={this.props.image} alt="profile"/></TableCell>
 <TableCell>{this.props.name}</TableCell>
-<TableCell>{this.props.birthday}</TableCell>
-<TableCell>{this.props.gender}</TableCell>
-<TableCell>{this.props.job}</TableCell>
+<TableCell>{this.props.model}</TableCell>
+<TableCell>{this.props.size}</TableCell>
+<TableCell>{this.props.color}</TableCell>
 <TableCell><CustomerDelete stateRefresh={this.props.stateRefresh} id={this.props.id}/></TableCell>
 
 </TableRow>

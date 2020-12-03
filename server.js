@@ -38,10 +38,10 @@ app.post('/api/customers', upload.single('image'), (req, res) => {
 let sql = 'INSERT INTO CUSTOMER VALUES (null, ?, ?, ?, ?, ?)';
 let image = '/image/' + req.file.filename;
 let name = req.body.name;
-let birthday = req.body.birthday;
-let gender = req.body.gender;
-let job = req.body.job;
-let params = [image, name, birthday, gender, job];
+let model = req.body.model;
+let size = req.body.size;
+let color = req.body.color;
+let params = [image, name, model, size, job];
 connection.query(sql, params,
 (err, rows, fields) => {
 res.send(rows);
