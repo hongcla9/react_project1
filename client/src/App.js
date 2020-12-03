@@ -1,45 +1,48 @@
 import React, { Component } from 'react';
 import Customer from './component/Customer'
 import './App.css';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-  root: {
-  width: "100%",
-  marginTop: theme.spacing.unit * 3,
-  overflowX: "auto"
-  },
-  table: {
-  minWidth: 1080
-  }
-  });
-  
+root: {
+width: "100%",
+marginTop: theme.spacing.unit * 3,
+overflowX: "auto"
+},
+table: {
+minWidth: 1080
+}
+});
 
 class App extends Component {
 
 state = {
-  customers:""
+customers: ''
 }
-//api서버에 접근하여 데이터를 받아옴 
-componentDidMount(){
-  this.callApi()
-  //받아서 state 설정 
-  .then(res => this.setState({customers:res}))
-  .catch(err => console.log(err));
+
+componentDidMount() {
+this.callApi()
+.then(res => this.setState({customers: res}))
+.catch(err => console.log(err));
 }
+
 callApi = async () => {
-  const response = await fetch('/api/customers');
-  const body = await response.json();
-  return body;
+const response = await fetch('/api/customers');
+const body = await response.json();
+return body;
 }
+
 render() {
+const { classes } = this.props;
 return (
-<div>
-<Table>
+<Paper className={classes.root}>
+<Table className={classes.table}>
 <TableHead>
 <TableRow>
 <TableCell>번호</TableCell>
@@ -56,10 +59,9 @@ return <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.
 }) : ''}
 </TableBody>
 </Table>
-</div>
+</Paper>
 );
 }
 }
 
 export default withStyles(styles)(App);
-
