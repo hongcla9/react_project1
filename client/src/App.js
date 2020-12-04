@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import { MenuList } from '@material-ui/core';
 
 const styles = theme => ({
 root: {
@@ -41,10 +42,6 @@ flexGrow: 1,
 },
 tableHead: {
 fontSize: '1.0rem'
-},
-menuButton: {
-marginLeft: -12,
-marginRight: 20,
 },
 title: {
 display: 'none',
